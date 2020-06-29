@@ -22,8 +22,10 @@ pcat <file_path> [options]
     11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
 
 ## Help Option:
-$ pcat --help
+
 """
+$ pcat --help
+
 Usage: pcat [OPTIONS] FILE
 
 Options:
