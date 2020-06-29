@@ -18,6 +18,6 @@ pcat <file_path> [options]
     7- pcat foo.txt -ln                     # output show line number
     8- pcat foo.txt -ln -fs "- "            # output show line number with suffix "-": like this (1- <text>)
     9- pcat foo.txt -ln -fs "- " -bs "│"    # output show line number with before suffix "│": like this (|1- <text>)
-   10- pcat foo.txt -ef                     # output write text by slow
-   11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
+    10- pcat foo.txt -ef                     # output write text by slow
+    11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
 
