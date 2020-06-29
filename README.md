@@ -23,7 +23,6 @@ pcat <file_path> [options]
 
 ## Help Option:
 
-"""
     $ pcat --help
 
     Usage: pcat [OPTIONS] FILE
@@ -48,4 +47,4 @@ pcat <file_path> [options]
       -et, --effect-time FLOAT  select spead for write.
       -v, --version             Show the version and exit.
       -h, --help                Show this message and exit.
-"""
+      
