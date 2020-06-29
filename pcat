@@ -33,7 +33,11 @@ def main(color, line, file, after_suffix,
     	grep, gcolor, befor_suffix, type,
     	end, show_line, line_color, effect_time, 
     	style, effect, hide_space):
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> fcd72b06f44c6e9ae1a701b6ea3c1ea13064cd22
     if argv[1] == 'doc':
         ali = pcolor.example()
         exit(0)
