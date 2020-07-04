@@ -1,10 +1,11 @@
 # pcat
 this script like cat and more options
 
-## this is pcat tutorial:
-
-pcat <file_path> [options]
-
+# Informations: 
+    Version: 1.3.6
+    python_version: 3.7.5
+    system: KUbuntu/linux
+    
 ## Examples:
     1- pcat foo.txt -c g                    # output green color
     2- pcat foo.txt -c g -s bold            # output green color with bold font
@@ -20,19 +21,36 @@ pcat <file_path> [options]
     9- pcat foo.txt -ln -fs "- " -bs "│"    # output show line number with before suffix "│": like this (|1- <text>)
     10- pcat foo.txt -ef                     # output write text by slow
     11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
-
+    
+    12- pcat foo.txt -ln -fs "- " -bs "|"
+    13- pcat foo.txt -ln -fs "- " -bs "|" -gr d -gc g
+    14- pcat foo.txt -ln -fs "- " -gr d -gc g
+    15- pcat foo.txt -ln -bs "(" -fs ")" -gr d -gc g
+    
+## new Options: 
+    1- pcat foo.txt -gr "d" -gc y
+    2- pcat foo.txt -gr "dark" -gc g
+    3- pcat foo.txt -gr "no" -gc w
+    4- pcat foo.txt -gr u -no -
+    5- pcat foo.txt -no <str>
+    
 ## Help Option:
-
+    
     $ pcat --help
-
+    
     Usage: pcat [OPTIONS] FILE
+
+      Concatenate FILE(s) to standard output
 
     Options:
       -e, --end TEXT            coustem end line
       -c, --color TEXT          print all text from file with color [g=green,
                                 y=yellow, ...]
       -n, --line TEXT           select number line for print
-      -g, --grep TEXT           grep any word with color
+      -g, --grep TEXT           grep any word with color and complit read for
+                                output
+      -gr, --grep-no TEXT       grep any word with color but not complit read
+                                output
       -gc, --gcolor TEXT        select grep color
       -bs, --befor_suffix TEXT  show befor_suffix for number or text
       -fs, --after_suffix TEXT  show after_suffix for number or text
@@ -45,6 +63,10 @@ pcat <file_path> [options]
       -ef, --effect             this option for write text in termainal write
                                 animate.
       -et, --effect-time FLOAT  select spead for write.
+      -rb, --byte               read file with byte
+      -no, --strip TEXT         Strip Word or characters
       -v, --version             Show the version and exit.
       -h, --help                Show this message and exit.
+
+
       
