@@ -1,16 +1,72 @@
 #!/usr/bin/python3
 
-from sys import argv, exit
-from click import command, argument, option, get_terminal_size, version_option, help_option
-from pstr import err, pcolor, find, findCo
-from pstr import file as file_pstr
+from click import command, argument, option, get_terminal_size, version_option, help_option, Group
+from pstr import err, findCo, pss, char
+from humanfriendly.terminal import usage
+from re import search
+import config
 
+
+## main Function
+def file_pstr(file, line=0, color='no', before_num='│',
+        grep='', grep_color='r', grep_set='',
+        show_num=False, color_num='no', suffix='',
+        suffix_color='', show_space=True,
+        End='', Type='color', Style='bold',
+        pr=True, Unicode="b", effect=[False, 0.01],
+
+        # new args
+        grep_no="", strip=None):
+
+# , encoding='utf-8'
+    if Unicode:
+        byte = "b"
+    else:
+        byte = ""
+    with open(file, f"r{byte}", encoding="iso8859-1") as FSa: #'utf-8'
+        
+        if line in ("*", "all", "end"): FI = FSa.readlines()[0:] 
+        else: FI = FSa.readlines()[0:int(line)]
+
+        for fil in enumerate(FI):
+            
+            ali = fil[1]
+            if show_space == False:
+                ali = fil[1].lstrip()
+                end = '\n'
+
+            if show_num:  num = fil[0]+1
+            else: num = ''
+
+            if not strip == None:
+                ali = fil[1].replace(strip, "")
+
+            if grep: 
+                ali = findCo(Text=fil[1], word=grep, default_color=color, color=grep_color)
+            if grep_no:
+                pattren= search(grep_no, fil[1]) 
+                if pattren:
+                    print(findCo(pss(f"{before_num}<!{color_num}>{num}<!e>{suffix_color}{suffix}<!{color}><!{grep_color}>{ali}<!e>"), grep_no, grep_color, "r"), end="" )
+            else: 
+                if effect[0]:
+                    Write(f"{before_num}<!{color_num}>{num}<!e>{suffix_color}{suffix}<!{color}>{ali}<!e>", pr=True, t=effect[1])
+                # elif Unicode:
+                #     pss(f"{before_num}<!{color_num}>{num}<!e>{suffix_color}{suffix}<!{color}>{ali}<!e>".encode('utf-8'), Type=Type, Style=Style, End=End, pr=pr)
+                else:
+                    pss(f"{before_num}<!{color_num}>{num}<!e>{suffix_color}{char(suffix)}<!{color}>{ali}<!e>", Type=Type, Style=Style, End=End, pr=pr)
+        
+        FSa.close()
+        exit(0)
+
+
+## main arguments
 @command()
 @argument('file')
 @option('-e', '--end', help='coustem end line', default='')
 @option('-c', '--color', help='print all text from file with color [g=green, y=yellow, ...]', default='no')
 @option('-n', '--line', help='select number line for print', default=str('*'))
-@option('-g', '--grep', help='grep any word with color')
+@option('-g', '--grep', help='grep any word with color and complit read for output')
+@option('-gr', '--grep-no', help='grep any word with color but not complit read output')
 @option('-gc', '--gcolor', help='select grep color', default='r')
 
 @option('-bs', '--befor_suffix', help='show befor_suffix for number or text', default='')
@@ -26,27 +82,22 @@ from pstr import file as file_pstr
 @option("-ef", "--effect", help="this option for write text in termainal write animate.", is_flag=True, default=False)
 @option("-et", "--effect-time", help="select spead for write.", type=float, default=float(0.02))
 
-@version_option('1.0.3', '-v', '--version', message='pcat: Version 1.0.3')
+@option("-rb", "--byte", help="read file with byte", is_flag=True)
+@option("-no", "--strip", help="Strip Word or characters")
+
+
+@version_option('1.3.6', '-v', '--version', message='pcat: Version 1.3.6')
 @help_option('-h', '--help')
 
+## main Functinon for run commands
 def main(color, line, file, after_suffix,
-    	grep, gcolor, befor_suffix, type,
-    	end, show_line, line_color, effect_time, 
-    	style, effect, hide_space):
-<<<<<<< HEAD
+    	grep, gcolor, befor_suffix, type, strip,
+    	end, show_line, line_color, effect_time, grep_no,
+    	style, effect, hide_space, byte):
+    """
+Concatenate FILE(s) to standard output
+    """
 
-=======
-    
->>>>>>> fcd72b06f44c6e9ae1a701b6ea3c1ea13064cd22
-    if argv[1] == 'doc':
-        ali = pcolor.example()
-        exit(0)
-
-    #print(click.getchar(False))
-    y, x = get_terminal_size()
-    if y < 50 and x < 10:
-        print('Please enlarge the terminal.')
-        exit(1)
     try:
         file_pstr(file, 
             line=line, 
@@ -62,37 +113,20 @@ def main(color, line, file, after_suffix,
             show_space=hide_space,
             before_num=befor_suffix,  #'│',
             ## if Unicode is True not print any thing because I using color from psrt
-            Unicode=False,
-            effect=[effect, effect_time])
-        
+            Unicode=byte,
+            effect=[effect, effect_time],
+            grep_no=grep_no,
+            strip=strip)
+
+    ## not argument found
     except KeyError as ker:
-        print(err(f'Oh no this key <!c>{ker}<!e> or argumant not found ...', message='', color='no'))
-    
+        print(err(f'this key <!c>{ker}<!e> or argumant not found ...', message='', color='no'))
+    ## not file found
     except FileNotFoundError as fer:
         print(err(f"{fer}", message='', color='no'))
-        # print(pstr.err(f"Oh no this '{argv[1]}' file not found", massing='', color='no'))
+    except UnicodeDecodeError as uner:
+        print(err(f"{uner}", message=''))
+
+
 if __name__ == "__main__":
     main()
-
-
-"""
-this is pcat tutorial:
-
-pcat <file_path> [options]
-
-Examples:
-    1- pcat foo.txt -c g                    # output green color
-    2- pcat foo.txt -c g -s bold            # output green color with bold font
-    3- pcat foo.txt -c g -t bg/co           # output green background color
-
-    4- pcat foo.txt -g field/"field"        # output grep/find of filed word in file
-    5- pcat foo.txt -g field/"field" -gc y  # output grep/find of filed word in file with yellow color default color is red
-    
-    6- pcat foo.txt -n 10                   # output 10 number of file
-    
-    7- pcat foo.txt -ln                     # output show line number
-    8- pcat foo.txt -ln -fs "- "            # output show line number with suffix "-": like this (1- <text>)
-    9- pcat foo.txt -ln -fs "- " -bs "│"    # output show line number with before suffix "│": like this (|1- <text>)
-   10- pcat foo.txt -ef                     # output write text by slow
-   10- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
-"""
