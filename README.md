@@ -22,15 +22,17 @@ this script like cat and more options
     10- pcat foo.txt -ef                     # output write text by slow
     11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
     
-    12- pcat test_2.txt -ln -fs "- " -bs "|"
-    13- pcat test_2.txt -ln -fs "- " -bs "|" -gr d -gc g
-    14- pcat test_2.txt -ln -fs "- " -gr d -gc g
-    15- pcat test_2.txt -ln -bs "(" -fs ")" -gr d -gc g
+    12- pcat foo.txt -ln -fs "- " -bs "|"
+    13- pcat foo.txt -ln -fs "- " -bs "|" -gr d -gc g
+    14- pcat foo.txt -ln -fs "- " -gr d -gc g
+    15- pcat foo.txt -ln -bs "(" -fs ")" -gr d -gc g
     
 ## new Options: 
     1- pcat foo.txt -gr "d" -gc y
     2- pcat foo.txt -gr "dark" -gc g
     3- pcat foo.txt -gr "no" -gc w
+    4- pcat foo.txt -gr u -no -
+    5- pcat foo.txt -no <str>
     
 ## Help Option:
     
@@ -61,6 +63,10 @@ this script like cat and more options
       -ef, --effect             this option for write text in termainal write
                                 animate.
       -et, --effect-time FLOAT  select spead for write.
+      -rb, --byte               read file with byte
+      -no, --strip TEXT         Strip Word or characters
       -v, --version             Show the version and exit.
       -h, --help                Show this message and exit.
+
+
       
