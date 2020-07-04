@@ -21,7 +21,12 @@ this script like cat and more options
     9- pcat foo.txt -ln -fs "- " -bs "│"    # output show line number with before suffix "│": like this (|1- <text>)
     10- pcat foo.txt -ef                     # output write text by slow
     11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
-
+    
+    12- pcat test_2.txt -ln -fs "- " -bs "|"
+    13- pcat test_2.txt -ln -fs "- " -bs "|" -gr d -gc g
+    14- pcat test_2.txt -ln -fs "- " -gr d -gc g
+    15- pcat test_2.txt -ln -bs "(" -fs ")" -gr d -gc g
+    
 ## new Options: 
     1- pcat foo.txt -gr "d" -gc y
     2- pcat foo.txt -gr "dark" -gc g
