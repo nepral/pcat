@@ -21,18 +21,28 @@ pcat <file_path> [options]
     10- pcat foo.txt -ef                     # output write text by slow
     11- pcat foo.txt -et 0.07                # output write text by slow with float time default time is 0.03
 
+## new Options: 
+    1- pcat foo.txt -gr "d" -gc y
+    2- pcat foo.txt -gr "dark" -gc g
+    3- pcat foo.txt -gr "no" -gc w
+    
 ## Help Option:
-
+    
     $ pcat --help
-
+    
     Usage: pcat [OPTIONS] FILE
+
+      Concatenate FILE(s) to standard output
 
     Options:
       -e, --end TEXT            coustem end line
       -c, --color TEXT          print all text from file with color [g=green,
                                 y=yellow, ...]
       -n, --line TEXT           select number line for print
-      -g, --grep TEXT           grep any word with color
+      -g, --grep TEXT           grep any word with color and complit read for
+                                output
+      -gr, --grep-no TEXT       grep any word with color but not complit read
+                                output
       -gc, --gcolor TEXT        select grep color
       -bs, --befor_suffix TEXT  show befor_suffix for number or text
       -fs, --after_suffix TEXT  show after_suffix for number or text
