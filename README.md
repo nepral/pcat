@@ -1,10 +1,11 @@
 # pcat
 this script like cat and more options
 
-## this is pcat tutorial:
-
-pcat <file_path> [options]
-
+# Informations: 
+    Version: 1.3.6
+    python_version: 3.7.5
+    system: KUbuntu/linux
+    
 ## Examples:
     1- pcat foo.txt -c g                    # output green color
     2- pcat foo.txt -c g -s bold            # output green color with bold font
